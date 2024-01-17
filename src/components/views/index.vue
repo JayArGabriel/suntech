@@ -106,18 +106,21 @@ export default defineComponent({
   },
   methods: {
     onChange(event: any) {
-      let dob = new Date(event?.data?.birthDay);  
-      //calculate month difference from current date in time  
-      let month_diff = Date.now() - dob.getTime();  
-      //convert the calculated difference in date format  
-      let age_dt = new Date(month_diff);   
-      //extract year from date      
-      let year = age_dt.getUTCFullYear();  
-      //now calculate the age of the user  
-      let age = Math.abs(year - 1970);
-      this.age = age
-      if(age > 18) uischema.elements[1].elements[1].rule.effect = 'SHOW'
-      else uischema.elements[1].elements[1].rule.effect = 'HIDE'
+      if(event?.data?.birthDay) {
+        let dob = new Date(event?.data?.birthDay);  
+        //calculate month difference from current date in time  
+        let month_diff = Date.now() - dob.getTime();  
+        //convert the calculated difference in date format  
+        let age_dt = new Date(month_diff);   
+        //extract year from date      
+        let year = age_dt.getUTCFullYear();  
+        //now calculate the age of the user  
+        let age = Math.abs(year - 1970);
+        this.age = age
+        console.log(this.age)
+        if(age > 18) uischema.elements[1].elements[1].rule.effect = 'SHOW'
+        else uischema.elements[1].elements[1].rule.effect = 'HIDE'
+      }
     }
   },
   provide() {
